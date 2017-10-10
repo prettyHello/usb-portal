@@ -1,0 +1,10 @@
+language: php
+php:
+  - '7.1'
+before_script:
+  - composer install --dev
+  - cp env.travis .env
+  - php artisan key:generate
+script: vendor/bin/phpunit && vendor/bin/phpcs
+notifications:
+    slack: cylab-be:smDx3z4O49KTDJQSsBwJOJul
