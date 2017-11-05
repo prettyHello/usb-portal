@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,50 +10,29 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+if(env("ALLOW_REGISTER", false)){
+    // Registration Routes...
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('register', 'Auth\RegisterController@register');
+}
 
+if(env("ALLOW_FORGOT_PSWD", false)) {
+    // Password Reset Routes...
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+}
 
+Route::get('/document', 'DocumentPageController@get');
+Route::get('/print', 'PrintPageController@get');
+Route::get('/uploadfile','UploadFileController@index');
+Route::post('/uploadfile','UploadFileController@showUploadFile');
 
+Route::resource('document', 'UploadFileController@index');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('users', 'UsersController@getInfos');
-Route::post('users', 'UsersController@postInfos');
-
-
-//Route::get('article/{n}', 'ArticleController@show')->where('n', '[0-9]+');
-//
-//Route::get('facture/{n}', function($n) {
-//    return view('article')->with('numero', $n);
-//    return view('article')->withNumero($n);
-//    return view('facture', ['numero' => $n]);
-//})->where('n', '[0-9]+');
-
-
-//Route::get('article/{n}', function($n) {
-//    return view('article')->with('numero', $n);
-//    return view('article')->withNumero($n);
-//    return view('article', ['numero' => $n]);
-//})->where('n', '[0-9]+');
-
-//Route::get('/', function()
-//{
-//    return view('view1');
-//});
-
-//Route::get('1', function () {
-//    return response('Je suis la page 1 !', 200);
-//});
