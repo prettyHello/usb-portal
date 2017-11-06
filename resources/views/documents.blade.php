@@ -27,18 +27,24 @@
                                     <th>Title</th>
                                     <th>Type</th>
                                     <th>User</th>
-                                    <th>Date</th>
+                                    <th>Creation date</th>
+                                    <th>Show</th>
+                                    <th>Download</th>
                                 </tr>
                             </thead>
                             <tbody>
 
+                            @foreach (App\Document::all() as $doc)
                                 <tr>
-                                    <td>0</td>
-                                    <td>test</td>
-                                    <td>pdf</td>
-                                    <td>ffadeur</td>
-                                    <td>10/12/2012</td>
+                                    <th>{{$doc->id}}</th>
+                                    <th>{{$doc->name}}</th>
+                                    <th>{{$doc->extension}}</th>
+                                    <th>{{$doc->id_user}}</th>
+                                    <th>{{$doc->created_at}}</th>
+                                    <th><a class="btn btn-info" href="{{ 'uploads/' . $doc->name }}">Show</a></th>
+                                    <th><a class="btn btn-danger" href="{{ 'uploads/' . $doc->name }}">Download</a></th>
                                 </tr>
+                            @endforeach
 
                             </tbody>
                         </table>

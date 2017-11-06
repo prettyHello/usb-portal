@@ -19,8 +19,8 @@ class UploadFileController extends Controller
         $destinationPath = 'uploads';
         $file->move($destinationPath, $file->getClientOriginalName());
 
-//        $document = new DocumentController();
-//        $document.store($request);
+        $document = new DocumentController();
+        $document->store($request);
 
         return view("print");
     }

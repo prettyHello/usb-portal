@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
@@ -41,8 +42,9 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-//        $document = new Document();
-//        $document->
+        $file = $request->file('doc');
+
+        Document::create(['name' => $file->getClientOriginalName(), 'extension' => $file->getClientOriginalExtension(), 'id_user' => Auth::user()->id]);
     }
 
     /**
@@ -88,5 +90,23 @@ class DocumentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function downloadDocument($id)
+    {
+        $fileName = getDocumentById($id);
+
+        $file = public_path(). "/uploads/" . $fileName;
+
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+
+        return response()->download($file, $fileName, $headers);
+    }
+
+    public function getDocumentById($id)
+    {
+
     }
 }

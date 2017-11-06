@@ -34,5 +34,23 @@ Route::get('/print', 'PrintPageController@get');
 Route::get('/uploadfile','UploadFileController@index');
 Route::post('/uploadfile','UploadFileController@showUploadFile');
 
-Route::resource('document', 'UploadFileController@index');
+Route::resource('/print', 'UploadFileController');
 
+
+Route::get('uploads/{filename}', function($filename)
+{
+    // Check if file exists in app/storage/file folder
+    $file_path = storage_path() .'/uploads/'. $filename;
+    if (file_exists($file_path))
+    {
+        // Send Download
+        return Response::download($file_path, $filename, [
+            'Content-Length: '. filesize($file_path)
+        ]);
+    }
+    else
+    {
+        // Error
+        exit('Requested file does not exist on our server!');
+    }
+})->where('filename', '[A-Za-z0-9\-\_\.]+');
