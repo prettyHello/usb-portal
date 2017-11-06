@@ -36,5 +36,7 @@ Route::post('/uploadfile','UploadFileController@showUploadFile');
 
 Route::resource('/print', 'UploadFileController');
 
+// download document route
+Route::get('/document/{document}', 'DocumentController@downloadDocument');
 
 

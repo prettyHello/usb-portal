@@ -92,21 +92,10 @@ class DocumentController extends Controller
         //
     }
 
-    public function downloadDocument($id)
+    public function downloadDocument(Document $document)
     {
-        $fileName = getDocumentById($id);
-
-        $file = public_path(). "/uploads/" . $fileName;
-
-        $headers = array(
-            'Content-Type: application/pdf',
-        );
-
-        return response()->download($file, $fileName, $headers);
+        $pathFile = public_path(). "/uploads/" . $document->name;
+        return response()->download($pathFile);
     }
 
-    public function getDocumentById($id)
-    {
-
-    }
 }
