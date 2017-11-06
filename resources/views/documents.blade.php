@@ -42,7 +42,7 @@
                                     <th>{{$doc->id_user}}</th>
                                     <th>{{$doc->created_at}}</th>
                                     <th><a class="btn btn-info" href="{{ 'uploads/' . $doc->name }}">Show</a></th>
-                                    <th><a class="btn btn-danger" href="{{ 'uploads/' . $doc->name }}">Download</a></th>
+                                    <th><a class="btn btn-danger" href="">Download</a></th>
                                 </tr>
                             @endforeach
 
