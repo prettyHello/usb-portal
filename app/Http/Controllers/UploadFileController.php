@@ -16,8 +16,8 @@ class UploadFileController extends Controller
         $file = $request->file('doc');
 
         //Move Uploaded File
-//        $destinationPath = 'uploads';
-        $file->move('uploads',$file->getClientOriginalName());
+        $destinationPath = 'uploads';
+        $file->move($destinationPath, $file->getClientOriginalName());
 
 //        $document = new DocumentController();
 //        $document.store($request);
