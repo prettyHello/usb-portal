@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class DocumentController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
