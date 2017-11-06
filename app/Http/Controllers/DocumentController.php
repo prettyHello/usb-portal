@@ -97,5 +97,4 @@ class DocumentController extends Controller
         $pathFile = public_path(). "/uploads/" . $document->name;
         return response()->download($pathFile);
     }
-
 }
