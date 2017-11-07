@@ -91,9 +91,5 @@ class DocumentUserController extends Controller
             ->rightJoin('documents', 'document_user.document_id', '=', 'documents.id')
             ->rightJoin('users', 'document_user.user_id', '=', 'users.id')
             ->get();
-
     }
-
-
-//select users.name as user_name, documents.name as doc_name  from document_user left join documents on document_user.document_id = documents.id left join users on document_user.user_id = users.id;
 }
