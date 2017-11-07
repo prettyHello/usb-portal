@@ -11,7 +11,7 @@ class UploadFileController extends Controller
         return view("print");
     }
 
-    public function showUploadFile(Request $request)
+    public function startUploadFile(Request $request)
     {
         $file = $request->file('doc');
 
