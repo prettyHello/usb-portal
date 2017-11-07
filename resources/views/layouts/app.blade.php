@@ -41,6 +41,7 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
 
+                    @auth
                     <ul class="nav navbar-nav">
                         <li>
                             <a class="navbar-brand" href="{{ url('/action') }}">
@@ -53,6 +54,7 @@
                             </a>
                         </li>
                     </ul>
+                    @endauth
 
                 </div>
 

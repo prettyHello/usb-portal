@@ -23,6 +23,7 @@
                         <table id="index_table" class="table table-responsive table-striped">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Document title</th>
                                     <th>User</th>
                                     <th>Action</th>
@@ -35,6 +36,7 @@
                             @foreach (\App\Http\Controllers\DocumentUserController::getAllDocumentUser() as $doc_user)
 
                                 <tr>
+                                    <th>{{ $doc_user->id }}</th>
                                     <th>{{ $doc_user->doc_name }}</th>
                                     <th>{{ $doc_user->user_name }}</th>
                                     <th>{{ $doc_user->action }}</th>

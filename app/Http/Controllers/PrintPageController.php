@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PrintPageController extends Controller
+class PrintPageController extends AuthController
 {
     public function get()
     {
