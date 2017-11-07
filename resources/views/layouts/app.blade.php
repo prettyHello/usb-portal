@@ -37,14 +37,14 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/document') }}">
+                    <a class="navbar-brand" href="{{ url('/action') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
 
                     <ul class="nav navbar-nav">
                         <li>
-                            <a class="navbar-brand" href="{{ url('/document') }}">
-                                Documents
+                            <a class="navbar-brand" href="{{ url('/action') }}">
+                                Actions
                             </a>
                         </li>
                         <li>

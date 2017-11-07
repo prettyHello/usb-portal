@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DocumentPageController extends Controller
+class ActionPageController extends Controller
 {
     public function get()
     {
-        return view("documents");
+        return view("actions");
     }
 }

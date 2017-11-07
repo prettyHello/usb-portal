@@ -29,7 +29,7 @@ if(env("ALLOW_FORGOT_PSWD", false)) {
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 }
 
-Route::get('/document', 'DocumentPageController@get');
+Route::get('/action', 'ActionPageController@get');
 Route::get('/print', 'PrintPageController@get');
 Route::get('/uploadfile','UploadFileController@index');
 Route::post('/uploadfile','UploadFileController@showUploadFile');

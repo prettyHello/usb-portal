@@ -23,27 +23,25 @@
                         <table id="index_table" class="table table-responsive table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Type</th>
+                                    <th>Document title</th>
                                     <th>User</th>
-                                    <th>Creation date</th>
+                                    <th>Action</th>
+                                    <th>Date</th>
                                     <th>Show</th>
-                                    <th>Download</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                            @foreach (App\Document::all() as $doc)
+                            @foreach (\App\Http\Controllers\DocumentUserController::getAllDocumentUser() as $doc_user)
+
                                 <tr>
-                                    <th>{{$doc->id}}</th>
-                                    <th>{{$doc->name}}</th>
-                                    <th>{{$doc->extension}}</th>
-                                    <th>{{$doc->id_user}}</th>
-                                    <th>{{$doc->created_at}}</th>
-                                    <th><a class="btn btn-info" href="{{ 'uploads/' . $doc->name }}">Show</a></th>
-                                    <th><a class="btn btn-danger" href="document/{{ $doc->id }}">Download</a></th>
+                                    <th>{{ $doc_user->doc_name }}</th>
+                                    <th>{{ $doc_user->user_name }}</th>
+                                    <th>{{ $doc_user->action }}</th>
+                                    <th>{{ $doc_user->created_at }}</th>
+                                    <th><a class="btn btn-info" href="{{ 'uploads/' . $doc_user->doc_name }}">Show</a></th>
                                 </tr>
+
                             @endforeach
 
                             </tbody>

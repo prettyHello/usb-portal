@@ -39,6 +39,7 @@
                                 <th>User</th>
                                 <th>Date</th>
                                 <th>Show</th>
+                                <th>Download</th>
                                 <th>Print</th>
                             </tr>
                             </thead>
@@ -52,6 +53,7 @@
                                         <th>{{$doc->id_user}}</th>
                                         <th>{{$doc->created_at}}</th>
                                         <th><a class="btn btn-info" href="{{ 'uploads/' . $doc->name }}">Show</a></th>
+                                        <th><a class="btn btn-danger" href="document/{{ $doc->id }}">Download</a></th>
                                         <th><button class="btn btn-success"><span>Print</span></button></th>
                                     </tr>
                                 @endforeach
