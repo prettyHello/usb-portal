@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Document_User;
+use App\DocumentUser;
 use Illuminate\Http\Request;
 
 class DocumentUserController extends Controller
@@ -36,7 +36,7 @@ class DocumentUserController extends Controller
      */
     public function store($user_id, $document_id, $action)
     {
-        Document_User::create(['user_id' => $user_id, 'document_id' => $document_id, 'action' => $action]);
+        DocumentUser::create(['user_id' => $user_id, 'document_id' => $document_id, 'action' => $action]);
     }
 
     /**
