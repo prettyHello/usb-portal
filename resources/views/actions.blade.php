@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Documents</div>
+                    <div class="panel-heading">Actions</div>
 
                     <div class="panel-body">
                         @if (session('status'))

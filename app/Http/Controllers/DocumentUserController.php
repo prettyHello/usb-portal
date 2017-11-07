@@ -30,12 +30,13 @@ class DocumentUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param $user_id
+     * @param $document_id
+     * @param $action represent the type of the action (could be upload, print)
      */
-    public function store(Request $request)
+    public function store($user_id, $document_id, $action)
     {
-        //
+        Document_User::create(['user_id' => $user_id, 'document_id' => $document_id, 'action' => $action]);
     }
 
     /**

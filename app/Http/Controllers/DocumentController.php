@@ -44,7 +44,7 @@ class DocumentController extends Controller
     {
         $file = $request->file('doc');
 
-        Document::create(['name' => $file->getClientOriginalName(), 'extension' => $file->getClientOriginalExtension(), 'id_user' => Auth::user()->id]);
+        return Document::create(['name' => $file->getClientOriginalName(), 'extension' => $file->getClientOriginalExtension(), 'id_user' => Auth::user()->id]);
     }
 
     /**

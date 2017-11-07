@@ -19,8 +19,11 @@ class UploadFileController extends Controller
         $destinationPath = 'uploads';
         $file->move($destinationPath, $file->getClientOriginalName());
 
-        $document = new DocumentController();
-        $document->store($request);
+        $documentController = new DocumentController();
+        $doc = $documentController->store($request);
+
+        $documentUserController = new DocumentUserController();
+        $documentUserController->store(\Auth::user()->id, $doc->id, env('UPLOAD', 'Upload'));
 
         return view("print");
     }
