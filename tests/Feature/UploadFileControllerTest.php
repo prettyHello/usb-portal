@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\User;
 
-class ActionPageControllerTest extends TestCase
+class UploadFileControllerTest extends TestCase
 {
     private $user;
 
@@ -23,13 +23,13 @@ class ActionPageControllerTest extends TestCase
 
     public function testGetNotConnected()
     {
-        $response = $this->get("/action");
+        $response = $this->get("/uploadfile");
         $response->assertRedirect("/login");
     }
 
     public function testGetConnected()
     {
-        $response = $this->actingAs($this->user)->get("/action");
+        $response = $this->actingAs($this->user)->get("/uploadfile");
         $response->assertStatus(200);
     }
 }

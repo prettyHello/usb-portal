@@ -23,14 +23,14 @@ class DocumentControllerTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_downloadDocumentNotConnected()
+    public function testDownloadDocumentNotConnected()
     {
         $response = $this->get("/document/2");
         $response->assertStatus(302);
     }
 
     // TODO : function test download
-//    public function test_GetConnected()
+//    public function testDownloadDocumentConnected()
 //    {
 //        $response = $this->actingAs($this->user)->get("/document/" . $this->document->id);
 //        $response->assertStatus(200);

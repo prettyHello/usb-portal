@@ -27,32 +27,29 @@ class UploadFileControllerTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_startUploadFileNotConnected()
-    {
-        Storage::fake('uploads');
-
-        $response = $this->json(
-            'POST',
-            '/uploadfile',
-            ['uploadfile' => UploadedFile::fake()->create('test.pdf', 50)]
-        );
-
-        // Assert a file does not exist...
-        Storage::disk('uploads')->assertMissing('test.pdf');
-    }
-
-    public function test_startUploadFileConnected()
+    public function testStartUploadFileNotConnected()
     {
         Storage::fake('uploads');
 
         $response = $this->actingAs($this->user)->json(
             'POST',
             '/uploadfile',
-            ['uploadfile' => UploadedFile::fake()->create('test.pdf', 50)]
+            ['avatar' => Document::fake()->create('test.pdf', 50)]
         );
 
-        // Assert a file does not exist...
-        Storage::disk('uploads')->assertExists('test.pdf');
+        Storage::disk('uploads')->assertMissing('test.pdf');
     }
 
+    public function testStartUploadFileConnected()
+    {
+        Storage::fake('uploads');
+
+        $response = $this->actingAs($this->user)->json(
+            'POST',
+            '/uploadfile',
+            ['avatar' => Document::fake()->create('test.pdf', 50)]
+        );
+
+        Storage::disk('uploads')->assertExists('test.pdf');
+    }
 }
