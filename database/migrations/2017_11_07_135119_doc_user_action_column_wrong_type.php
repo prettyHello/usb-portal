@@ -13,13 +13,15 @@ class DocUserActionColumnWrongType extends Migration
      */
     public function up()
     {
-        Schema::table('document_user', function (Blueprint $table) {
-            $table->dropColumn(["action"]);
-        });
+        if (Schema::hasColumn('document_user', 'action')) {
+            Schema::table('document_user', function (Blueprint $table) {
+                $table->dropColumn(["action"]);
+            });
+        }
 
 
         Schema::table('document_user', function (Blueprint $table) {
-            $table->string('action');
+            $table->string('action')->nullable();
         });
     }
 

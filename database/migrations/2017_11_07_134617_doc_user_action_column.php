@@ -14,7 +14,7 @@ class DocUserActionColumn extends Migration
     public function up()
     {
         Schema::table('document_user', function (Blueprint $table) {
-            $table->dateTime('action');
+            $table->dateTime('action')->nullable();
         });
     }
 

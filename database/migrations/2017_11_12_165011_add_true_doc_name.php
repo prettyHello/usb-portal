@@ -14,7 +14,7 @@ class AddTrueDocName extends Migration
     public function up()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->string("real_name");
+            $table->string("real_name")->nullable();
         });
     }
 
