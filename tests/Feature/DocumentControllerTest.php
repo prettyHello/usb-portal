@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\DocumentController;
 use Tests\TestCase;
 use App\User;
 
@@ -22,14 +23,14 @@ class DocumentControllerTest extends TestCase
         parent::tearDown();
     }
 
-    public function downloadDocumentNotConnected()
+    public function test_downloadDocumentNotConnected()
     {
-        $response = $this->downloadDocument("/document/2");
+        $response = $this->get("/document/2");
         $response->assertStatus(302);
     }
 
     // TODO : function test download
-//    public function testGetConnected()
+//    public function test_GetConnected()
 //    {
 //        $response = $this->actingAs($this->user)->get("/document/" . $this->document->id);
 //        $response->assertStatus(200);

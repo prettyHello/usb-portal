@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 
 class UploadFileController extends AuthController
 {
-    public function index()
-    {
-        return view("print");
-    }
 
     public function startUploadFile(Request $request)
     {

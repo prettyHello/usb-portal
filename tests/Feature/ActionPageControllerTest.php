@@ -21,13 +21,13 @@ class ActionPageControllerTest extends TestCase
         parent::tearDown();
     }
 
-    public function testGetNotConnected()
+    public function test_GetNotConnected()
     {
         $response = $this->get("/action");
         $response->assertRedirect("/login");
     }
 
-    public function testGetConnected()
+    public function test_GetConnected()
     {
         $response = $this->actingAs($this->user)->get("/action");
         $response->assertStatus(200);
