@@ -37,5 +37,7 @@ Route::post('/uploadfile','UploadFileController@startUploadFile');
 
 // download document route
 Route::get('/document/{document}', 'DocumentController@downloadDocument');
+//show
+Route::get('/document/show/{document}', 'DocumentController@showDocument');
 
 

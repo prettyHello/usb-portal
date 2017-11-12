@@ -87,9 +87,9 @@ class DocumentUserController extends AuthController
     public static function getAllDocumentUser()
     {
         return \DB::table('document_user')
-            ->select('users.name as user_name', 'documents.name as doc_name', 'action', 'document_user.created_at as created_at', 'document_user.id as id')
-            ->rightJoin('documents', 'document_user.document_id', '=', 'documents.id')
-            ->rightJoin('users', 'document_user.user_id', '=', 'users.id')
+            ->select('users.name as user_name', 'documents.id as doc_id', 'documents.name as doc_name', 'action', 'document_user.created_at as created_at', 'document_user.id as id')
+            ->Join('documents', 'document_user.document_id', '=', 'documents.id')
+            ->Join('users', 'document_user.user_id', '=', 'users.id')
             ->get();
     }
 }

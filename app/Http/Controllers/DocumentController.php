@@ -14,16 +14,19 @@ class DocumentController extends AuthController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $path)
     {
         $file = $request->file('doc');
-
-        return Document::create(['name' => $file->getClientOriginalName(), 'extension' => $file->getClientOriginalExtension(), 'id_user' => Auth::user()->id]);
+        return Document::create(['name' => $file->getClientOriginalName(), 'extension' => $file->getClientOriginalExtension(), 'id_user' => Auth::user()->id, 'real_name' => $path]);
     }
 
     public function downloadDocument(Document $document)
     {
-        $pathFile = public_path(). "/uploads/" . $document->name;
-        return response()->download($pathFile);
+        return response()->download(storage_path("app/" . $document->real_name), $document->name);
+    }
+
+    public function showDocument(Document $document)
+    {
+        return response()->file(storage_path("app/" . $document->real_name));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UploadFileController extends AuthController
 {
@@ -19,15 +20,17 @@ class UploadFileController extends AuthController
         }
 
         // we retrieve the file
-        $file = $request->file('doc');
+        $file = $request->file('doc')->store("uploads");
 
         // Move Uploaded File
-        $destinationPath = 'uploads';
-        $file->move($destinationPath, $file->getClientOriginalName());
+//        $destinationPath = 'uploads';
+//        $file->move($destinationPath, $file->getClientOriginalName());
+//        Storage::disk('local');
+//        Storage::put("uploads/" . $file->getClientOriginalName(), $file);
 
         // creation of the document
         $documentController = new DocumentController();
-        $doc = $documentController->store($request);
+        $doc = $documentController->store($request, $file);
 
         // cr
         $documentUserController = new DocumentUserController();

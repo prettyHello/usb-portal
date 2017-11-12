@@ -8,7 +8,7 @@ use Illuminate\Http\Testing\FileFactory;
 class Document extends Model
 {
     protected $table = 'documents';
-    protected $fillable = ['name', 'extension', 'id_user'];
+    protected $fillable = ['name', 'extension', 'id_user', 'real_name'];
     public $timestamps = true;
 
     public static function fake()
