@@ -27,7 +27,7 @@ class DocumentController extends AuthController
 
     public function showDocument(Document $document)
     {
-        return response()->file(storage_path("app/" . $document->real_name));
+        return response()->file_put_contents($document->name, storage_path("app/" . $document->real_name));
     }
 
     public static function getAllDocuments()
