@@ -29,4 +29,12 @@ class DocumentController extends AuthController
     {
         return response()->file(storage_path("app/" . $document->real_name));
     }
+
+    public static function getAllDocuments()
+    {
+        return \DB::table('documents')
+            ->select('users.name as user_name', 'documents.id as doc_id', 'documents.extension as extension', 'documents.name as doc_name', 'documents.created_at as created_at')
+            ->Join('users', 'documents.id_user', '=', 'users.id')
+            ->get();
+    }
 }

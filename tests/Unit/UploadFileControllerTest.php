@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Document;
 use App\User;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
 
 class UploadFileControllerTest extends TestCase
 {
@@ -25,27 +24,15 @@ class UploadFileControllerTest extends TestCase
         parent::tearDown();
     }
 
-    public function testStartUploadFileNotConnected()
+    public function testStartUploadFileConnected()
     {
-        Storage::fake('uploads');
+        Storage::fake('storage/app/uploads');
 
         $response = $this->actingAs($this->user)->post(
             '/uploadfile',
-            ['doc' => Document::fake()->create('test.pdf', 50)]
+            ['doc' => Document::fake()->create('test2.pdf', 50)]
         );
 
-        Storage::disk('uploads')->assertMissing('test.pdf');
+        $this->assertRegexp('/test2.pdf/', $response->getContent());
     }
-
-//    public function testStartUploadFileConnected()
-//    {
-//        Storage::fake('uploads');
-//
-//        $response = $this->actingAs($this->user)->post(
-//            '/uploadfile',
-//            ['doc' => Document::fake()->create('test.pdf', 50)]
-//        );
-//
-//        Storage::disk('uploads')->assertExists('test.pdf');
-//    }
 }

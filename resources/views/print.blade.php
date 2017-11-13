@@ -45,16 +45,16 @@
                             </thead>
                             <tbody>
 
-                                @foreach (App\Document::all() as $doc)
+                                @foreach (\App\Http\Controllers\DocumentController::getAllDocuments() as $doc)
                                     <tr>
-                                        <th>{{$doc->id}}</th>
-                                        <th>{{$doc->name}}</th>
+                                        <th>{{$doc->doc_id}}</th>
+                                        <th>{{$doc->doc_name}}</th>
                                         <th>{{$doc->extension}}</th>
-                                        <th>{{$doc->id_user}}</th>
+                                        <th>{{$doc->user_name}}</th>
                                         <th>{{$doc->created_at}}</th>
-                                        <th><a class="btn btn-info" href="{{ 'document/show/' . $doc->id }}">Show</a></th>
-                                        <th><a class="btn btn-danger" href="document/{{ $doc->id }}">Download</a></th>
-                                        <th><button class="btn btn-success"><span>Print</span></button></th>
+                                        <th><a class="btn btn-info" href="{{ 'document/show/' . $doc->doc_id }}">Show</a></th>
+                                        <th><a class="btn btn-danger" href="document/{{ $doc->doc_id }}">Download</a></th>
+                                        <th><a class="btn btn-success" href="print/{{ $doc->doc_id }}"><span>Print</span></a></th>
                                     </tr>
                                 @endforeach
 

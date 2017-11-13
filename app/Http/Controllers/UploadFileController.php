@@ -19,20 +19,14 @@ class UploadFileController extends AuthController
             return view('print');
         }
 
-        // we retrieve the file
+        // we retrieve the file and store it in the uploads folder.
         $file = $request->file('doc')->store("uploads");
-
-        // Move Uploaded File
-//        $destinationPath = 'uploads';
-//        $file->move($destinationPath, $file->getClientOriginalName());
-//        Storage::disk('local');
-//        Storage::put("uploads/" . $file->getClientOriginalName(), $file);
 
         // creation of the document
         $documentController = new DocumentController();
         $doc = $documentController->store($request, $file);
 
-        // cr
+        // creation of the document user row
         $documentUserController = new DocumentUserController();
         $documentUserController->store(\Auth::user()->id, $doc->id, env('UPLOAD', 'Upload'));
 
