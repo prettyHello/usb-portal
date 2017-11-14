@@ -4,7 +4,7 @@
  <file>app</file>
  <file>tests</file>
   <exclude-pattern>*/migrations/*</exclude-pattern>
-  <exclude-pattern>*/phpprintipp/*</exclude-pattern>
+  <exclude-pattern>*/Lib/*</exclude-pattern>
  <arg value="np"/>
 <rule ref="PSR2"/>
 </ruleset>
