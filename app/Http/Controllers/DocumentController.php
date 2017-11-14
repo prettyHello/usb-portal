@@ -22,6 +22,8 @@ class DocumentController extends AuthController
 
     public function downloadDocument(Document $document)
     {
+        $documentUserController = new DocumentUserController();
+        $documentUserController->store(\Auth::user()->id, $document->id, env('DOWNLOAD', 'download'));
 
         return response()->download(storage_path("app/" . $document->real_name), $document->name);
     }
