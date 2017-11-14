@@ -1,7 +1,7 @@
 <?php
-namespace App;
+namespace App\Lib;
 
-use App\httpException;
+use App\Lib\httpException;
 
 /***********************
  *

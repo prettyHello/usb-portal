@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CupsPrintIPP;
+use App\Lib\CupsPrintIPP;
 use App\Document;
 use Symfony\Component\HttpFoundation\File\File;
 

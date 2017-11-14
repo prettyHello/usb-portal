@@ -43,9 +43,9 @@
 
 //require_once("PrintIPP.php");
 
-namespace App;
+namespace App\Lib;
 
-use App\PrintIPP;
+use App\Lib\PrintIPP;
 
 class ExtendedPrintIPP extends PrintIPP
 {

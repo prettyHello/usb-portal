@@ -64,9 +64,9 @@
  * httpException class
  *
  ************************/
-namespace App;
+namespace App\Lib;
 
-use App\ippException;
+use App\Lib\ippException;
 
 class httpException extends ippException
 {

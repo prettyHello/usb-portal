@@ -37,7 +37,7 @@
  */
 
 //require_once ("http_class.php");
-namespace App;
+namespace App\Lib;
 
 class ippException extends \Exception
 {

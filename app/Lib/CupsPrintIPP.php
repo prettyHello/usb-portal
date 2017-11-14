@@ -37,9 +37,9 @@
 */
 
 //require_once("ExtendedPrintIPP.php");
-namespace App;
+namespace App\Lib;
 
-use App\ExtendedPrintIPP;
+use App\Lib\ExtendedPrintIPP;
 use stdClass;
 
 class CupsPrintIPP extends ExtendedPrintIPP

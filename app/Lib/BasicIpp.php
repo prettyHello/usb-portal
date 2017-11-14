@@ -1,5 +1,7 @@
 <?php
-namespace App;
+namespace App\Lib;
+
+use App\Lib\httpClass;
 
 class BasicIPP
 {

@@ -42,9 +42,9 @@
 
 //require_once("BasicIPP.php");
 
-namespace App;
+namespace App\Lib;
 
-use App\BasicIPP;
+use App\Lib\BasicIpp;
 
 class PrintIPP extends BasicIPP
 {
