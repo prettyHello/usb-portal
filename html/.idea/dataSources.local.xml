@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="dbuser@192.168.56.101" uuid="e51939dd-a9bb-4016-91f4-946778b71b95">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>dbuser</user-name>
+      <introspection-schemas>*</introspection-schemas>
+      <ssh-properties>
+        <enabled>true</enabled>
+        <proxy-host>192.168.56.101</proxy-host>
+        <proxy-port>3306</proxy-port>
+        <user>dbuser</user>
+        <use-password>false</use-password>
+        <private-key-path>$PROJECT_DIR$/../puphpet/files/dot/ssh/id_rsa</private-key-path>
+      </ssh-properties>
+    </data-source>
+  </component>
+</project>
