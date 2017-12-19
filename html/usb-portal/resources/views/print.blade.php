@@ -52,9 +52,9 @@
                                         <th>{{$doc->extension}}</th>
                                         <th>{{$doc->user_name}}</th>
                                         <th>{{$doc->created_at}}</th>
-                                        <th><a class="btn btn-info" href="{{ 'document/show/' . $doc->doc_id }}">Show</a></th>
-                                        <th><a class="btn btn-danger" href="document/{{ $doc->doc_id }}">Download</a></th>
-                                        <th><a class="btn btn-success" href="print/{{ $doc->doc_id }}"><span>Print</span></a></th>
+                                        <th><a class="btn btn-info" href="{{ '/document/show/' . $doc->doc_id }}">Show</a></th>
+                                        <th><a class="btn btn-danger" href="/document/{{ $doc->doc_id }}">Download</a></th>
+                                        <th><a class="btn btn-success" href="/print/{{ $doc->doc_id }}"><span>Print</span></a></th>
                                     </tr>
                                 @endforeach
 

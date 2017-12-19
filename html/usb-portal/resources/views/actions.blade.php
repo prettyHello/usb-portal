@@ -41,7 +41,7 @@
                                     <th>{{ $doc_user->user_name }}</th>
                                     <th>{{ $doc_user->action }}</th>
                                     <th>{{ $doc_user->created_at }}</th>
-                                    <th><a class="btn btn-info" href="{{ 'document/show/' . $doc_user->doc_id }}">Show</a></th>
+                                    <th><a class="btn btn-info" href="{{ '/document/show/' . $doc_user->doc_id }}">Show</a></th>
                                 </tr>
 
                             @endforeach

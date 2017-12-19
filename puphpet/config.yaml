@@ -28,9 +28,6 @@ vagrantfile:
                                 vflmnfp_hgcm2kyk8mex:
                                     host: '7418'
                                     guest: '22'
-                                vflmnfp_hgcm2kyk8frz:
-                                    host: '6311'
-                                    guest: '631'    
                         memory: '512'
                         cpus: '1'
         provision:
@@ -94,6 +91,7 @@ server:
         - htop
         - libapache2-mod-php
         - phpmyadmin
+        - cups
 users_groups:
     install: '1'
     groups: {  }

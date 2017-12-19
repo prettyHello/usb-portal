@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Lib\CupsPrintIPP;
 use App\Document;
+use App\Lib\CupsPrintIPP;
 use Symfony\Component\HttpFoundation\File\File;
 
 class PrintPageController extends AuthController
@@ -21,11 +21,10 @@ class PrintPageController extends AuthController
     public function printDocument(Document $document)
     {
         $ipp = new CupsPrintIPP();
-        $ipp->setHost(env("PRINT_HOST", "localhost"));
-        $ipp->setPrinterURI(env("PRINT_URI", "/printers/Brother"));
+
+        $ipp->setPrinterURI(env("PRINT_URI", "ipp://localhost:631/printers/PDF"));
         $ipp->setData(new File(storage_path("app/" . $document->real_name)));
-//        $result = $ipp->printJob();
-//        $job = $ipp->last_job;
+        $ipp->printJob();
 
         $documentUserController = new DocumentUserController();
         $documentUserController->store(\Auth::user()->id, $document->id, env('PRINT', 'print'));

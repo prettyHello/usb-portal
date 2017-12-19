@@ -4,7 +4,7 @@ puphpet/config-custom.yaml
 /public/storage
 /storage/*.key
 /vendor
-/.idea
+/.idea/*
 /.vagrant
 Homestead.json
 Homestead.yaml
