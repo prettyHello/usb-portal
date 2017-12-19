@@ -2,6 +2,7 @@ language: php
 php:
   - '7.1'
 before_script:
+  - cd html/usb-portal
   - composer install --dev
   - cp env.travis .env
   - touch storage/app/db.sqlite
