@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\DocumentController;
-use Tests\TestCase;
 use App\User;
+use Tests\TestCase;
 
 class DocumentControllerTest extends TestCase
 {
@@ -29,10 +29,27 @@ class DocumentControllerTest extends TestCase
         $response->assertStatus(302);
     }
 
-    // TODO : function test download
 //    public function testDownloadDocumentConnected()
 //    {
 //        $response = $this->actingAs($this->user)->get("/document/" . $this->document->id);
 //        $response->assertStatus(200);
 //    }
+
+//    public function testShowDocumentConnected(Document $document)
+//    {
+//
+//    }
+
+//    public function testShowDocumentNotConnected(Document $document)
+//    {
+//
+//    }
+
+    // TODO : faire des mocks pour être sûr que ça passe sur Travis
+    public static function testGetAllDocuments()
+    {
+        $documents = DocumentController::getAllDocuments();
+        $size = sizeof($documents);
+        self::assertTrue($size > 0);
+    }
 }

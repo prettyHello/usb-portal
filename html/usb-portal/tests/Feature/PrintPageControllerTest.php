@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\User;
+use Tests\TestCase;
 
 class PrintPageControllerTest extends TestCase
 {
@@ -32,4 +32,10 @@ class PrintPageControllerTest extends TestCase
         $response = $this->actingAs($this->user)->get("/print");
         $response->assertStatus(200);
     }
+
+    //TODO: check new input in action
+//    public function testprintDocument(Document $document)
+//    {
+//
+//    }
 }

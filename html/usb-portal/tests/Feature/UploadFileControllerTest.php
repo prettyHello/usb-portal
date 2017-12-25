@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\User;
+use Tests\TestCase;
 
 class UploadFileControllerTest extends TestCase
 {
@@ -32,4 +32,31 @@ class UploadFileControllerTest extends TestCase
         $response = $this->actingAs($this->user)->get("/uploadfile");
         $response->assertStatus(200);
     }
+
+    public function testGetConnectedIndex()
+    {
+        $response = $this->actingAs($this->user)->get("/print");
+        $response->assertStatus(200);
+    }
+
+    public function testGetNotConnectedIndex()
+    {
+        $response = $this->get("/print");
+        $response->assertRedirect("/login");
+    }
+
+//    public function testAvatarUpload()
+//    {
+//        Storage::fake('avatars');
+//
+//        $response = $this->json('POST', '/uploadfile', [
+//            'avatar' => UploadFileController::fake()->image('avatar.jpg')
+//        ]);
+//
+//        // Assert the file was stored...
+//        Storage::disk('avatars')->assertExists('avatar.jpg');
+//
+//        // Assert a file does not exist...
+//        Storage::disk('avatars')->assertMissing('missing.jpg');
+//    }
 }
