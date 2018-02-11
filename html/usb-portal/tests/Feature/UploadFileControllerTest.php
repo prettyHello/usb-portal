@@ -44,19 +44,4 @@ class UploadFileControllerTest extends TestCase
         $response = $this->get("/print");
         $response->assertRedirect("/login");
     }
-
-//    public function testAvatarUpload()
-//    {
-//        Storage::fake('avatars');
-//
-//        $response = $this->json('POST', '/uploadfile', [
-//            'avatar' => UploadFileController::fake()->image('avatar.jpg')
-//        ]);
-//
-//        // Assert the file was stored...
-//        Storage::disk('avatars')->assertExists('avatar.jpg');
-//
-//        // Assert a file does not exist...
-//        Storage::disk('avatars')->assertMissing('missing.jpg');
-//    }
 }

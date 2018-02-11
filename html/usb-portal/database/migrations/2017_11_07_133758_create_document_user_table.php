@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDocumentUserTable extends Migration
 {
@@ -17,6 +17,7 @@ class CreateDocumentUserTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('document_id');
+            $table->string('action')->nullable();
             $table->timestamps();
         });
     }
