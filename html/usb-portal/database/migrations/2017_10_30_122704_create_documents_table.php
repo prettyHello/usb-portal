@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDocumentsTable extends Migration
 {
@@ -15,9 +15,9 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 200);
+            $table->string('name');
+            $table->string('real_name');
             $table->string('extension', 10);
-            $table->dateTime('date');
             $table->integer('id_user');
             $table->timestamps();
         });

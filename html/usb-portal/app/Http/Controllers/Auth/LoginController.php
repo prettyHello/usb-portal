@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Adldap\Laravel\Facades\Adldap;
 use App\Http\Controllers\Controller;
-use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -39,21 +39,18 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function username()
-    {
+    public function username() {
         return config('adldap_auth.usernames.eloquent');
     }
 
-    protected function validateLogin(Request $request)
-    {
+    protected function validateLogin(Request $request) {
         $this->validate($request, [
             $this->username() => 'required|string|regex:/^\w+$/',
             'password' => 'required|string',
         ]);
     }
 
-    protected function attemptLogin(Request $request)
-    {
+    protected function attemptLogin(Request $request) {
         $credentials = $request->only($this->username(), 'password');
         $username = $credentials[$this->username()];
         $password = $credentials['password'];
@@ -61,20 +58,21 @@ class LoginController extends Controller
         $user_format = env('ADLDAP_USER_FORMAT', 'cn=%s,'.env('ADLDAP_BASEDN', ''));
         $userdn = sprintf($user_format, $username);
 
-        if (Adldap::auth()->attempt($userdn, $password, $bindAsUser = true)) {
+        if(Adldap::auth()->attempt($userdn, $password, $bindAsUser = true)) {
             // the user exists in the LDAP server, with the provided password
 
-            $user = User::where($this->username(), $username) -> first();
+            $user = \App\User::where($this->username(), $username) -> first();
             if (!$user) {
                 // the user doesn't exist in the local database, so we have to create one
 
-                $user = new User();
+                $user = new \App\User();
                 $user->username = $username;
                 $user->password = '';
 
                 // you can skip this if there are no extra attributes to read from the LDAP server
                 // or you can move it below this if(!$user) block if you want to keep the user always
                 // in sync with the LDAP server
+
                 $sync_attrs = $this->retrieveSyncAttributes($username);
                 foreach ($sync_attrs as $field => $value) {
                     $user->$field = $value !== null ? $value : '';
@@ -91,10 +89,11 @@ class LoginController extends Controller
         return false;
     }
 
-    protected function retrieveSyncAttributes($username)
-    {
+    protected function retrieveSyncAttributes($username) {
+
         $ldapuser = Adldap::search()->where(env('ADLDAP_USER_ATTRIBUTE'), '=', $username)->first();
-        if (!$ldapuser) {
+
+        if ( !$ldapuser ) {
             // log error
             return false;
         }
@@ -109,7 +108,7 @@ class LoginController extends Controller
         $attrs = [];
 
         foreach (config('adldap_auth.sync_attributes') as $local_attr => $ldap_attr) {
-            if ($local_attr == 'username') {
+            if ( $local_attr == 'username' ) {
                 continue;
             }
 
@@ -148,11 +147,12 @@ class LoginController extends Controller
         return $attrs;
     }
 
-    protected static function accessProtected($obj, $prop)
-    {
+    protected static function accessProtected ($obj, $prop) {
         $reflection = new \ReflectionClass($obj);
         $property = $reflection->getProperty($prop);
         $property->setAccessible(true);
         return $property->getValue($obj);
     }
+
 }
+#

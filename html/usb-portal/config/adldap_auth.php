@@ -118,13 +118,15 @@ return [
         |
         */
 
-        'ldap' => [
+//        'ldap' => [
+//
+//            'discover' => 'userprincipalname',
+//
+//            'authenticate' => 'distinguishedname',
+//
+//        ],
 
-            'discover' => 'userprincipalname',
-
-            'authenticate' => 'distinguishedname',
-
-        ],
+        'ldap' => env('ADLDAP_USER_ATTRIBUTE', 'userprincipalname'),
 
         /*
         |--------------------------------------------------------------------------
@@ -140,8 +142,8 @@ return [
         |
         */
 
-        'eloquent' => 'email',
-//        'eloquent' => 'username',
+//        'eloquent' => 'email',
+        'eloquent' => 'username',
 
         /*
         |--------------------------------------------------------------------------
@@ -258,10 +260,8 @@ return [
 
     'sync_attributes' => [
 
-        'email' => 'userprincipalname',
-
+        'username' => 'uid', // was 'email' => 'userprincipalname',
         'name' => 'cn',
-
     ],
 
     /*
