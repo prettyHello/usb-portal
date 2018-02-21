@@ -39,18 +39,21 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function username() {
+    public function username()
+    {
         return config('adldap_auth.usernames.eloquent');
     }
 
-    protected function validateLogin(Request $request) {
+    protected function validateLogin(Request $request)
+    {
         $this->validate($request, [
             $this->username() => 'required|string|regex:/^\w+$/',
             'password' => 'required|string',
         ]);
     }
 
-    protected function attemptLogin(Request $request) {
+    protected function attemptLogin(Request $request)
+    {
         $credentials = $request->only($this->username(), 'password');
         $username = $credentials[$this->username()];
         $password = $credentials['password'];
@@ -58,7 +61,7 @@ class LoginController extends Controller
         $user_format = env('ADLDAP_USER_FORMAT', 'cn=%s,'.env('ADLDAP_BASEDN', ''));
         $userdn = sprintf($user_format, $username);
 
-        if(Adldap::auth()->attempt($userdn, $password, $bindAsUser = true)) {
+        if (Adldap::auth()->attempt($userdn, $password, $bindAsUser = true)) {
             // the user exists in the LDAP server, with the provided password
 
             $user = \App\User::where($this->username(), $username) -> first();
@@ -89,11 +92,12 @@ class LoginController extends Controller
         return false;
     }
 
-    protected function retrieveSyncAttributes($username) {
+    protected function retrieveSyncAttributes($username)
+    {
 
         $ldapuser = Adldap::search()->where(env('ADLDAP_USER_ATTRIBUTE'), '=', $username)->first();
 
-        if ( !$ldapuser ) {
+        if (!$ldapuser) {
             // log error
             return false;
         }
@@ -108,7 +112,7 @@ class LoginController extends Controller
         $attrs = [];
 
         foreach (config('adldap_auth.sync_attributes') as $local_attr => $ldap_attr) {
-            if ( $local_attr == 'username' ) {
+            if ($local_attr == 'username') {
                 continue;
             }
 
@@ -147,12 +151,12 @@ class LoginController extends Controller
         return $attrs;
     }
 
-    protected static function accessProtected ($obj, $prop) {
+    protected static function accessProtected($obj, $prop)
+    {
         $reflection = new \ReflectionClass($obj);
         $property = $reflection->getProperty($prop);
         $property->setAccessible(true);
         return $property->getValue($obj);
     }
-
 }
 #
