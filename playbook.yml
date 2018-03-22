@@ -41,11 +41,17 @@
         - vim
         - htop
         - cups
+        - slapd
+        - ldapscripts
+        - ldap-utils
       
     - name: Setup Apache default virtualhost
       file: state=link src=/vagrant/000-default.conf dest=/etc/apache2/sites-enabled/000-default.conf
       notify:
         - restart apache
+        
+    - name: Setup LDAP server
+      shell: /vagrant/ldap/setup.sh
 
   handlers:
     - name: restart apache

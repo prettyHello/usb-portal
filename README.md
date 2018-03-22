@@ -93,3 +93,5 @@ vagrant up
 ```
 
 The app will be available at http://192.168.56.101
+
+The Vagrant setup script creates a default user ```test : test```

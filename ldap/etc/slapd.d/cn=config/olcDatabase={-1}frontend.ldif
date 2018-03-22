@@ -1,0 +1,18 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 d93e9d38
+dn: olcDatabase={-1}frontend
+objectClass: olcDatabaseConfig
+objectClass: olcFrontendConfig
+olcDatabase: {-1}frontend
+olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=extern
+ al,cn=auth manage by * break
+olcAccess: {1}to dn.exact="" by * read
+olcAccess: {2}to dn.base="cn=Subschema" by * read
+olcSizeLimit: 500
+structuralObjectClass: olcDatabaseConfig
+entryUUID: 7ad9bd7a-c21a-1037-8f5e-9d87f17a8c60
+creatorsName: cn=config
+createTimestamp: 20180322124418Z
+entryCSN: 20180322124418.011445Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20180322124418Z

@@ -1,0 +1,1 @@
+ldapsearch -D "cn=admin,dc=example,dc=org" -w test123 -p 389 -h 127.0.0.1 -b "dc=example,dc=org" -s sub "(objectclass=*)"
