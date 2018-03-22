@@ -37,20 +37,24 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/action') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                    <a class="navbar-brand" href="{{ url('/usb') }}">USB Portal</a>
 
                     @auth
                     <ul class="nav navbar-nav">
                         <li>
-                            <a class="navbar-brand" href="{{ url('/action') }}">
-                                Actions
+                            <a class="navbar-brand" href="{{ url('/usb') }}">
+                                USB
                             </a>
                         </li>
                         <li>
                             <a class="navbar-brand" href="{{ url('/print') }}">
                                 Print
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a class="navbar-brand" href="{{ url('/history') }}">
+                                History
                             </a>
                         </li>
                     </ul>

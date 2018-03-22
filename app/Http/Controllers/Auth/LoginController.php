@@ -38,7 +38,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
+    
     public function username()
     {
         return config('adldap_auth.usernames.eloquent');
@@ -58,38 +58,27 @@ class LoginController extends Controller
         $username = $credentials[$this->username()];
         $password = $credentials['password'];
 
-        $user_format = env('ADLDAP_USER_FORMAT', 'cn=%s,'.env('ADLDAP_BASEDN', ''));
-        $userdn = sprintf($user_format, $username);
 
-        if (Adldap::auth()->attempt($userdn, $password, $bindAsUser = true)) {
-            // the user exists in the LDAP server, with the provided password
-
-            $user = \App\User::where($this->username(), $username) -> first();
-            if (!$user) {
-                // the user doesn't exist in the local database, so we have to create one
-
-                $user = new \App\User();
-                $user->username = $username;
-                $user->password = '';
-
-                // you can skip this if there are no extra attributes to read from the LDAP server
-                // or you can move it below this if(!$user) block if you want to keep the user always
-                // in sync with the LDAP server
-
-                $sync_attrs = $this->retrieveSyncAttributes($username);
-                foreach ($sync_attrs as $field => $value) {
-                    $user->$field = $value !== null ? $value : '';
-                }
-            }
-
-            // by logging the user we create the session so there is no need to login again (in the configured time)
-            $this->guard()->login($user, true);
-            return true;
+        if (!Adldap::auth()->attempt($username, $password, true)) {
+            return false;
+        }
+        
+        // the user exists in the LDAP server, with the provided password
+        // Let's check if the user exists in local db...
+        $user = \App\User::where($this->username(), $username) -> first();
+        
+        if (!$user) {
+            $user = new \App\User();
+            $user->username = $username;
+            $user->name = $username;
+            $user->password = '';
+            $user->save();
         }
 
-        // the user doesn't exist in the LDAP server or the password is wrong
-        // log error
-        return false;
+        // by logging the user we create the session so there is no need to login again (in the configured time)
+        $this->guard()->login($user, true);
+        return true;
+
     }
 
     protected function retrieveSyncAttributes($username)

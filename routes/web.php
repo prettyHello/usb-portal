@@ -30,7 +30,7 @@ if(env("ALLOW_FORGOT_PSWD", false)) {
 }
 
 Route::get('/', 'ActionPageController@get');
-Route::get('/action', 'ActionPageController@get');
+Route::get('/history', 'ActionPageController@get');
 Route::get('/print', 'PrintPageController@get');
 Route::get('/uploadfile','UploadFileController@index');
 Route::post('/uploadfile','UploadFileController@startUploadFile');

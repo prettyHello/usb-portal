@@ -12,21 +12,14 @@ It is meant to be used on secured networks where the administrator wants to keep
 
 ## Functionnalities
 
+## USB
+
+
+
 ### History
 
 In this view, you can check the activity of users.
 
-![Image](image_md/action_user_date.png)
-
-
-To facilitate the user experience, it's possible to search, filter and sort in the table. 
-Your research can be based on all table colunms. 
-You can decide how many items you want to show per page thanks to the select in the left top of the screen. 
-
-![Image](image_md/items_search.png)
-
-
-It's possible to see what the person checked by clicking on the button show   
 
 ![Image](image_md/show_action.png)
 
@@ -71,3 +64,32 @@ touch storage/app/db.sqlite
 php artisan key:generate
 php artisan migrate
 ```
+
+## Contributing
+
+### Development requirements
+
+* vagrant
+* node.js
+* npm
+
+### Building JS and CSS
+
+The project uses laravel-mix and npm to build css and js files
+
+https://laravel.com/docs/5.6/frontend
+
+```
+npm install
+npm run dev
+```
+
+### Running the test environemnt
+
+There is a vagrant VM for development. To launch the VM:
+
+```
+vagrant up
+```
+
+The app will be available at http://192.168.56.101
