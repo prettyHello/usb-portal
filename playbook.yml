@@ -40,8 +40,8 @@
         - htop
         - cups
       
-    - name: Setup Apache sites
-      file: state=link src=/vagrant/sites.conf dest=/etc/apache2/sites-enabled/sites.conf
+    - name: Setup Apache default virtualhost
+      file: state=link src=/vagrant/000-default.conf dest=/etc/apache2/sites-enabled/000-default.conf
       notify:
         - restart apache
 
