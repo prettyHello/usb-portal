@@ -1,0 +1,50 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install Apache
+      apt: pkg=apache2 state=installed update_cache=true
+
+    - name: Enable Apache mod_rewrite
+      apache2_module:
+        name: rewrite
+      notify:
+        - restart apache
+        
+    - name: Add ondrej PHP repository
+      apt_repository:
+        repo: 'ppa:ondrej/php'
+        
+    - name: APT-GET update
+      apt:
+        update_cache: yes
+      
+    - name: Install PHP7.1 packages
+      apt: pkg={{item}} state=installed
+      with_items:
+        - php7.1
+        - php7.1-mysql
+        - php7.1-sqlite3
+        - php7.1-gd
+        - php7.1-curl
+        - php7.1-json
+        - php7.1-mcrypt
+        - php7.1-tidy
+        - php7.1-xml
+        - libapache2-mod-php7.1
+        
+    - name: Install additional packages
+      apt: pkg={{item}} state=installed
+      with_items:
+        - vim
+        - htop
+        - cups
+      
+    - name: Setup Apache sites
+      file: state=link src=/vagrant/sites.conf dest=/etc/apache2/sites-enabled/sites.conf
+      notify:
+        - restart apache
+
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted

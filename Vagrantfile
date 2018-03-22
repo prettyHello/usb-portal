@@ -1,31 +1,31 @@
-# -*- mode: ruby -*-
+Vagrant.configure(2) do |config|
 
-dir = File.dirname(File.expand_path(__FILE__))
+  config.vm.box = "ubuntu/xenial64"
+  
+  config.proxy.http     = "http://10.67.1.60:3128/"
+  config.proxy.https    = "http://10.67.1.60:3128/"
+  config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+  
+  config.vm.define "usb-portal" do |machine|
+    machine.vm.network "private_network", ip: "192.168.56.101"
+  end
 
-require 'yaml'
-require "#{dir}/puphpet/ruby/deep_merge.rb"
-require "#{dir}/puphpet/ruby/to_bool.rb"
-require "#{dir}/puphpet/ruby/puppet.rb"
+  # port forwarding
+  #config.vm.network "forwarded_port", guest: 631, host: 6311
+  #config.vm.network "forwarded_port", guest: 22, host: 7418
+  #config.vm.network "forwarded_port", guest: 80, host: 8081
+  
+  config.vm.synced_folder ".", "/vagrant", owner: "www-data"
 
-configValues = YAML.load_file("#{dir}/puphpet/config.yaml")
-
-provider = ENV['VAGRANT_DEFAULT_PROVIDER'] ? ENV['VAGRANT_DEFAULT_PROVIDER'] : 'local'
-if File.file?("#{dir}/puphpet/config-#{provider}.yaml")
-  custom = YAML.load_file("#{dir}/puphpet/config-#{provider}.yaml")
-  configValues.deep_merge!(custom)
+  config.vm.provider "virtualbox" do |vb|
+     # Customize the amount of memory on the VM:
+     vb.memory = "1024"
+  end
+  
+  # Run Ansible to perform provisioning
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook       = "playbook.yml"
+    # ansible.verbose        = true
+    ansible.install        = true
+  end
 end
-
-if File.file?("#{dir}/puphpet/config-custom.yaml")
-  custom = YAML.load_file("#{dir}/puphpet/config-custom.yaml")
-  configValues.deep_merge!(custom)
-end
-
-data = configValues['vagrantfile']
-
-Vagrant.require_version '>= 1.8.1'
-
-Vagrant.configure('2') do |config|
-  eval File.read("#{dir}/puphpet/vagrant/Vagrantfile-#{data['target']}")
-  config.vm.network "forwarded_port", guest: 631, host: 6311
-end
-
