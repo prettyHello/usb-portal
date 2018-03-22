@@ -12,13 +12,9 @@ It is meant to be used on secured networks where the administrator wants to keep
 
 ## Functionnalities
 
-### Action
+### History
 
-
-To show all the actions that the users made, you have to click on the "Actions" button on the top of the screen.
-
-
-In this view, you can check the action that people made on the files.   
+In this view, you can check the activity of users.
 
 ![Image](image_md/action_user_date.png)
 
@@ -64,6 +60,7 @@ The USB-Portal is based on the Laravel framework.
 ```
 git clone git@github.com:RUCD/usb-portal.git
 cd usb-portal
+cp env.travis .env
 ```
 
 Modify ```.env``` to fit your needs
